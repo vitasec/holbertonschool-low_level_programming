@@ -8,8 +8,6 @@
 int main(void)
 {
 	int num;
-	char separator[] = {',', ' '};
-	int i;
 
 	for (num = 0; num <= 9; num++)
 	{
@@ -17,10 +15,8 @@ int main(void)
 		
 		if (num != 9)
 		{
-			for (i = 0; i < 2; i++)
-			{
-				putchar(separator[i]);
-			}
+			putchar(',');
+			putchar(' ');
 		}
 	}
 
