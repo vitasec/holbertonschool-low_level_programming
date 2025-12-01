@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 
 /**
  * main - Prints all possible combinations of single-digit numbers
@@ -14,18 +13,18 @@ int main(void)
 	{
 		for (j = i + 1; j <= 9; j++)
 		{
-			putchar(i + '0');  /* 1st putchar: birinci rəqəm */
-			putchar(j + '0');  /* 2nd putchar: ikinci rəqəm */
+			putchar(i + '0');  /* 1st putchar */
+			putchar(j + '0');  /* 2nd putchar */
 
-			if (!(i == 8 && j == 9)) /* son kombinasiyada vergül və boşluq yoxdur */
+			if (!(i == 8 && j == 9))
 			{
-				putchar(',');   /* 3rd putchar: vergül */
-				putchar(' ');   /* 4th putchar: boşluq */
+				putchar(',');   /* 3rd putchar */
+				putchar(' ');   /* 4th putchar */
 			}
+			else
+				putchar('\n');  /* 4th putchar əvəzinə yeni sətir son kombinasiyada */
 		}
 	}
-
-	putchar('\n'); /* yeni sətir */
 
 	return (0);
 }
