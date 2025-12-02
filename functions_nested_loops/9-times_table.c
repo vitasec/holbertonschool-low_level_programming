@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <unistd.h>
 
 /**
  * times_table - prints the 9 times table, starting with 0
@@ -8,6 +8,7 @@
 void times_table(void)
 {
 	int i, j, result;
+	char digit;
 
 	for (i = 0; i < 10; i++)
 	{
@@ -15,18 +16,25 @@ void times_table(void)
 		{
 			result = i * j;
 
-			if (j == 0)
+			/* Her sütun için formatlama */
+			if (j != 0)
 			{
-				printf("%d", result);
-			}
-			else
-			{
-				printf(", ");
+				write(1, ", ", 2);
 				if (result < 10)
-					printf(" ");
-				printf("%d", result);
+					write(1, " ", 1);
 			}
+
+			/* İki basamaklı sayı için onlar basamağı */
+			if (result >= 10)
+			{
+				digit = (result / 10) + '0';
+				write(1, &digit, 1);
+			}
+
+			/* Birler basamağı */
+			digit = (result % 10) + '0';
+			write(1, &digit, 1);
 		}
-		printf("\n");
+		write(1, "\n", 1);
 	}
 }
