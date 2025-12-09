@@ -2,12 +2,11 @@
 #include <stdio.h>
 
 /**
- * print_array - Prints n elements of an array of integers.
- * @a: The array of integers.
- * @n: The number of elements to be printed.
+ * print_array - prints array
+ * @a: int to print
+ * @n: first n element to print
  *
- * Description: Elements are separated by a comma and a space,
- * except for the last element.
+ * Return: void
  */
 void print_array(int *a, int n)
 {
@@ -15,9 +14,8 @@ void print_array(int *a, int n)
 
 	for (i = 0; i < n; i++)
 	{
-		printf("%d", a[i]);
+		printf("%d", (a[i]));
 
-		/* Yalnız sonuncu elementdən əvvəl vergül və boşluq əlavə et */
 		if (i != n - 1)
 		{
 			printf(", ");
@@ -26,3 +24,4 @@ void print_array(int *a, int n)
 
 	printf("\n");
 }
+
