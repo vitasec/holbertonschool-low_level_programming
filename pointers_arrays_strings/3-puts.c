@@ -1,29 +1,24 @@
 #include "main.h"
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * _puts - Prints a string followed by a new line to stdout.
+ * @str: The string to be printed.
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- * _puts - Prints a string followed by a new line to stdout
- * @str: Pointer to the string to print
- *
- * Return: void
+ * Description: Iterates through the string and prints each character
+ * until the null terminator is reached, then prints a
+ * new line character.
  */
 void _puts(char *str)
 {
-	while (*str != '\0')
+	int i = 0;
+
+	/* Stringin sonuna (null terminatora '\0') çatana qədər dövr edir */
+	while (str[i] != '\0')
 	{
-		_putchar(*str);
-		str++;
+		_putchar(str[i]); /* Hər bir simvolu çap edir */
+		i++;
 	}
+
+	/* Simvolları çap etdikdən sonra yeni sətir simvolunu çap edir */
 	_putchar('\n');
 }
