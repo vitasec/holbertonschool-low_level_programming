@@ -5,17 +5,24 @@
  * @str: The string to be processed.
  *
  * Description: Prints characters at index 0, 2, 4, 6, etc.,
- *
  * followed by a new line.
  */
 void puts2(char *str)
 {
-	int i = 0;
+	int len = 0;
+	int i;
 
-	while (str[i] != '\0')
+	/* 1. Sətrin uzunluğunu tapmaq */
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+
+	/* 2. Hər digər simvolu çap etmək */
+	/* Dövr yalnız uzunluq daxilində qalmasını təmin edir */
+	for (i = 0; i < len; i += 2)
 	{
 		_putchar(str[i]);
-		i += 2;
 	}
 
 	_putchar('\n');
