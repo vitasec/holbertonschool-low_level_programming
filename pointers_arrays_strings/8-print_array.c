@@ -1,42 +1,28 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * puts_half - Prints the second half of a string, followed by a new line.
- * @str: The string to be processed and printed.
+ * print_array - Prints n elements of an array of integers.
+ * @a: The array of integers.
+ * @n: The number of elements to be printed.
  *
- * Description: Calculates length and prints the second half.
+ * Description: Elements are separated by a comma and a space,
+ * except for the last element.
  */
-void puts_half(char *str)
+void print_array(int *a, int n)
 {
-	int len = 0;
-	int start_index;
+	int i;
 
-	/* Sətrin uzunluğunu tapmaq */
-	while (str[len] != '\0')
+	for (i = 0; i < n; i++)
 	{
-		len++;
+		printf("%d", a[i]);
+
+		/* Yalnız sonuncu elementdən əvvəl vergül və boşluq əlavə et */
+		if (i != n - 1)
+		{
+			printf(", ");
+		}
 	}
 
-	/* Uzunluğun cüt olub-olmamasına görə başlanğıc indeksini hesabla */
-	if (len % 2 == 0)
-	{
-		/* Cüt: Məsələn, uzunluq 10 olsa, başlanğıc 10 / 2 = 5 */
-		start_index = len / 2;
-	}
-	else
-	{
-		/* Tək: Məsələn, uzunluq 9 olsa, başlanğıc (9 + 1) / 2 = 5 */
-		/* Bu, n = (L + 1) / 2 qaydasına uyğundur. */
-		start_index = (len + 1) / 2;
-	}
-
-	/* İkinci yarı simvolları çap etmək */
-	while (str[start_index] != '\0')
-	{
-		_putchar(str[start_index]);
-		start_index++;
-	}
-
-	/* Yeni sətir əlavə etmək */
-	_putchar('\n');
+	printf("\n");
 }
