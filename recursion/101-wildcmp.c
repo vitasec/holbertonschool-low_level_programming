@@ -9,41 +9,38 @@
  */
 int wildcmp(char *s1, char *s2)
 {
-	/* 1. Temel Durum 1: Her iki dize de sona erdiyse (Eşleşme Tamamlandı) */
+	/* 1. Her İki Dize de Sona Erdiyse: Mükemmel Eşleşme */
 	if (*s1 == '\0' && *s2 == '\0')
 	{
 		return (1);
 	}
 
-	/* 2. Joker Karakter Kontrolü: s2'nin mevcut karakteri '*' ise */
+	/* 2. s2'de '*' Karakteri Kontrolü */
 	if (*s2 == '*')
 	{
-		/* A. '*' karakteri bittiyse (s2'deki sonraki karakter null ise) */
-		/* s1'in geri kalan kısmı ne olursa olsun eşleşir. */
-		if (*(s2 + 1) == '\0')
+		/* Ardışık '*' karakterlerini atla */
+		while (*(s2 + 1) == '*')
 		{
-			return (1);
+			s2++;
 		}
 
-		/* B. İki Rekursif Yol Denenir (Önemli Adım): */
-		/* Yol 1: '*' boş bir dizeyi temsil eder. */
-		/* s1'de kal, s2'de '*'dan sonraki karaktere ilerle (s2 + 1). */
-		/* VEYA (||) */
-		/* Yol 2: '*' bir karakteri temsil eder. */
-		/* s1'de bir karakter ilerle (s1 + 1), s2'de '*'da kal. */
-		/* (Bu, '*'ın birden fazla karakteri temsil etmesini sağlar.) */
-		return (wildcmp(s1, s2 + 1) || wildcmp(s1 + 1, s2));
+		/* Yol A: '*' boş dizeyi temsil eder (s2'de ilerle) VEYA */
+		/* Yol B: '*' bir veya daha fazla karakteri temsil eder (s1'de ilerle) */
+		return (wildcmp(s1, s2 + 1) || (*s1 != '\0' && wildcmp(s1 + 1, s2)));
 	}
 
-	/* 3. Normal Karakter Kontrolü: s1 ve s2'deki karakterler eşleşiyorsa */
+	/* 3. s1 bitti, ama s2 bitmediyse (ve s2'de '*' yok): Başarısızlık */
+	if (*s1 == '\0' && *s2 != '\0')
+	{
+		return (0);
+	}
+
+	/* 4. Normal Karakter Eşleşmesi */
 	if (*s1 == *s2)
 	{
-		/* Her iki dizede de bir sonraki karaktere ilerle. */
 		return (wildcmp(s1 + 1, s2 + 1));
 	}
 
-	/* 4. Temel Durum 2 (Başarısızlık): Eşleşme yok ve '*' yok */
-	/* (Bu, *s1 != *s2 olduğu ve *s2 != '*' olmadığı anlamına gelir.) */
-	/* Veya s1 bitti (*s1 == '\0') ama s2 bitmedi. */
+	/* 5. Genel Başarısızlık */
 	return (0);
 }
