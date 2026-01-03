@@ -1,5 +1,10 @@
 #include "3-calc.h"
 
+/**
+ * get_op_func - İduzgun function secme
+ * @s: Operator simvolu
+ * Return: Uygun olan gostricisi, tapilmasa NULL
+ */
 int (*get_op_func(char *s))(int, int)
 {
 	op_t ops[] = {
@@ -12,13 +17,12 @@ int (*get_op_func(char *s))(int, int)
 	};
 	int i = 0;
 
-	/* Operatoru massivdə axtarırıq */
-	while (ops[i].op != NULL)
+	while (ops[i].op != NULL && s != NULL)
 	{
-		/* Əgər operator tapılsa, funksiya göstəricisini qaytarırıq */
-		if (strcmp(ops[i].op, s) == 0)
+		if (strcmp(ops[i].op, s) == 0 && s[1] == '\0')
 			return (ops[i].f);
 		i++;
 	}
+
 	return (NULL);
 }
