@@ -55,7 +55,7 @@ void print_ident(unsigned char *e_ident)
 		printf("2's complement, big endian\n");
 	else
 		printf("none\n");
-	printf("  Version:                           %d (current)\n",
+	printf("  Version:                           %d\n",
 		e_ident[EI_VERSION]);
 }
 
