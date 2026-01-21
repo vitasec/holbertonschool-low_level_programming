@@ -2,11 +2,24 @@
 #include <stdio.h>
 
 /**
+ * close_err - Fayl deskriptorunu bağlayır və ya xəta verir.
+ * @fd: Bağlanmalı olan file descriptor.
+ */
+void close_err(int fd)
+{
+	if (close(fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+/**
  * main - Bir faylın məzmununu digərinə köçürür.
  * @argc: Arqumentlərin sayı.
  * @argv: Arqumentlərin massivi.
  *
- * Return: Uğurlu olsa 0.
+ * Return: 0 (Uğurlu).
  */
 int main(int argc, char **argv)
 {
@@ -33,7 +46,7 @@ int main(int argc, char **argv)
 	while ((r = read(fd_from, buffer, 1024)) > 0)
 	{
 		w = write(fd_to, buffer, r);
-		if (w != r)
+		if (w == -1 || w != r)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			exit(99);
@@ -44,15 +57,7 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	if (close(fd_from) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
-		exit(100);
-	}
-	if (close(fd_to) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
-		exit(100);
-	}
+	close_err(fd_from);
+	close_err(fd_to);
 	return (0);
 }
