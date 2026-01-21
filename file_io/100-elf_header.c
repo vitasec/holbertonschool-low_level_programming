@@ -6,6 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void check_elf(unsigned char *e_ident);
+void print_ident(unsigned char *e_ident);
+void print_osabi_type(unsigned char *e_ident, unsigned int e_type);
+void print_entry(unsigned long int e_entry, unsigned char *e_ident);
+
 /**
  * check_elf - Faylın ELF olub olmadığını yoxlayır.
  * @e_ident: ELF identifikator massivi.
@@ -142,7 +147,7 @@ int main(int argc, char **argv)
 	check_elf(h->e_ident);
 	printf("ELF Header:\n");
 	print_ident(h->e_ident);
-	print_osabi_type(h->e_ident, h->h->e_type);
+	print_osabi_type(h->e_ident, h->e_type);
 	print_entry(h->e_entry, h->e_ident);
 	free(h);
 	if (close(fd) == -1)
